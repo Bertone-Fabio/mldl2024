@@ -18,7 +18,7 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_result
         faiss_index = faiss.IndexFlatL2(embed_size)
         
         # add references
-        faiss_index.add(db_desc.to(torch.float32))
+        faiss_index.add(db_desc)
 
         # search for queries in the index
         _, predictions = faiss_index.search(q_desc, max(k_values))
