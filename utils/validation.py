@@ -6,6 +6,9 @@ from prettytable import PrettyTable
 
 def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_results=True, faiss_gpu=False):
         
+        db_desc = db_desc.numpy()
+        q_desc = q_desc.numpy()
+
         embed_size = db_desc.shape[1]
         if faiss_gpu:
             res = faiss.StandardGpuResources()
