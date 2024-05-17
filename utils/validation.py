@@ -8,17 +8,19 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_result
         
         db_desc = db_desc.numpy()
         q_desc = q_desc.numpy()
+        
+        print(type(db_desc),type(q_desc))
 
         embed_size = db_desc.shape[1]
-        if faiss_gpu:
-            res = faiss.StandardGpuResources()
-            flat_config = faiss.GpuIndexFlatConfig()
-            flat_config.useFloat16 = True
-            flat_config.device = 0
-            faiss_index = faiss.GpuIndexFlatL2(res, embed_size, flat_config)
-        # build index
-        else:
-            faiss_index = faiss.IndexFlatL2(embed_size)
+        # if faiss_gpu:
+        #     res = faiss.StandardGpuResources()
+        #     flat_config = faiss.GpuIndexFlatConfig()
+        #     flat_config.useFloat16 = True
+        #     flat_config.device = 0
+        #     faiss_index = faiss.GpuIndexFlatL2(res, embed_size, flat_config)
+        # # build index
+        # else:
+        faiss_index = faiss.IndexFlatL2(embed_size)
         
         # add references
         faiss_index.add(db_desc)
