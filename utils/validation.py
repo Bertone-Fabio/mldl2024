@@ -5,7 +5,7 @@ from prettytable import PrettyTable
 import torch
 
 
-def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_results=True, faiss_gpu=False):
+def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_results=False, faiss_gpu=False, dataset_name = "Name"):
         
         db_desc = db_desc.numpy()
         q_desc = q_desc.numpy()
