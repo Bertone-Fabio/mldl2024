@@ -2,6 +2,7 @@ import numpy as np
 import faiss
 import faiss.contrib.torch_utils
 from prettytable import PrettyTable
+import torch
 
 
 def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_results=True, faiss_gpu=False):
@@ -17,7 +18,7 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_result
         faiss_index = faiss.IndexFlatL2(embed_size)
         
         # add references
-        faiss_index.add(db_desc)
+        faiss_index.add(db_desc.to(torch.float32))
 
         # search for queries in the index
         _, predictions = faiss_index.search(q_desc, max(k_values))
