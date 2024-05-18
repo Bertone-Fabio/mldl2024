@@ -10,8 +10,6 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, print_result
         db_desc = db_desc.numpy()
         q_desc = q_desc.numpy()
         
-        print("Tipo db",type(db_desc))
-        print("tipo query",type(q_desc))
 
         embed_size = db_desc.shape[1]
  
