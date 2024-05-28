@@ -46,7 +46,7 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, save_dir ,pr
             print(table.get_string(title=f"Performance on {dataset_name}"))
         
         if num_queries_to_save > 0:
-            save_predictions(predictions, eval_dataset, ground_truth, save_dir,num_queries_to_save=5)
+            save_predictions(predictions, eval_dataset, ground_truth, save_dir,num_queries_to_save)
 
         return d, predictions
 
