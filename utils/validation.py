@@ -57,12 +57,13 @@ def save_predictions(predictions, inference_dataset, ground_truth, save_dir,num_
     os.makedirs(save_dir, exist_ok=True)
     # Limita il numero di query da salvare al minimo tra il numero richiesto e il numero totale di query
     num_queries_to_save = min(num_queries_to_save, len(predictions))
+    q_idxs = np.random.choice(len(predictions, size = num_queries_to_save, replace = False))
     
-    for q_idx in range(num_queries_to_save):
+    for q_idx in q_idxs:
         pred = predictions[q_idx]
         # Ottieni l'immagine della query e l'etichetta
         query_index = inference_dataset.num_db_images + q_idx  
-        _, query_label = inference_dataset[query_index] 
+        #_, query_label = inference_dataset[query_index] 
         query_image_path = inference_dataset.all_image_paths[query_index]
         query_image = Image.open(query_image_path)
         
@@ -77,7 +78,7 @@ def save_predictions(predictions, inference_dataset, ground_truth, save_dir,num_
         
         # Salva le immagini delle predizioni
         for i, pred_index in enumerate(pred):
-            _, pred_label = inference_dataset[pred_index] 
+            #_, pred_label = inference_dataset[pred_index] 
             pred_image_path = inference_dataset.all_image_paths[pred_index]
             pred_image = Image.open(pred_image_path)
             pred_type = "correct" if pred_index in ground_truth[q_idx] else "incorrect"
@@ -85,6 +86,6 @@ def save_predictions(predictions, inference_dataset, ground_truth, save_dir,num_
             pred_image_path = os.path.join(query_dir, pred_image_filename)
             pred_image.save(pred_image_path)
         
-        return
+    return
 
 
