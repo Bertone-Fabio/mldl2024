@@ -20,23 +20,13 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, save_dir ,pr
         # add references
         faiss_index.add(db_desc)
 
-        print("db_desc_shape",db_desc.shape)
-        print("db_desc",db_desc)
-        print("q_desc_shape",q_desc.shape)
-        print("q_desc",q_desc)
-
         # search for queries in the index
         _, predictions = faiss_index.search(q_desc, max(k_values))
-
-        print("predictions shape", predictions.shape)
-        print("predictions", predictions)
         
         
         
         # start calculating recall_at_k
         ground_truth = eval_dataset.get_positives()
-        print("ground_truth shape",ground_truth.shape)
-        print("ground truth",ground_truth)
         correct_at_k = np.zeros(len(k_values))
         for q_idx, pred in enumerate(predictions):
             for i, n in enumerate(k_values):
