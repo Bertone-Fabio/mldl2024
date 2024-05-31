@@ -20,6 +20,11 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, save_dir ,pr
         # add references
         faiss_index.add(db_desc)
 
+        print("db_desc_shape",db_desc.shape)
+        print("db_desc",db_desc)
+        print("q_desc_shape",q_desc.shape)
+        print("q_desc",q_desc)
+
         # search for queries in the index
         _, predictions = faiss_index.search(q_desc, max(k_values))
 
@@ -62,8 +67,8 @@ def save_predictions(predictions, inference_dataset, ground_truth, save_dir,num_
     os.makedirs(save_dir, exist_ok=True)
     # Limita il numero di query da salvare al minimo tra il numero richiesto e il numero totale di query
     num_queries_to_save = min(num_queries_to_save, len(predictions))
-    q_idxs = np.random.choice(len(predictions, size = num_queries_to_save, replace = False))
-    
+    q_idxs = np.random.choice(len(predictions), size = num_queries_to_save, replace = False)
+
     for q_idx in q_idxs:
         pred = predictions[q_idx]
         # Ottieni l'immagine della query e l'etichetta
