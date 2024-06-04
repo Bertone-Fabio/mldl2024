@@ -60,4 +60,5 @@ def get_aggregator(agg_arch='ConvAP', agg_config={}):
             nn.Flatten()
         )
     elif 'mixvpr' in agg_arch.lower():
+        print("Importando mixpvr")
         return aggregators.MixVPR(**agg_config)
