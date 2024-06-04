@@ -59,3 +59,5 @@ def get_aggregator(agg_arch='ConvAP', agg_config={}):
             nn.AdaptiveAvgPool2d((1,1)),
             nn.Flatten()
         )
+    elif 'mixvpr' in agg_arch.lower():
+        return aggregators.MixVPR(**agg_config)
