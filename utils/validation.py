@@ -70,8 +70,7 @@ def get_validation_recalls(eval_dataset, db_desc, q_desc, k_values, save_dir, pr
         table = PrettyTable()
         table.field_names = ['K'] + [str(k) for k in k_values]
         table.add_row(['Recall@K'] + [f'{100*v:.2f}' for v in correct_at_k])
-        print(table.get_string(title=f"Performance   
- on {dataset_name}"))
+        print(table.get_string(title=f"Performance on {dataset_name}"))
 
     # Save visualizations if requested and num_queries_to_save is positive
     if num_queries_to_save > 0:
