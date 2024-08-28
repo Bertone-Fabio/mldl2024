@@ -104,7 +104,11 @@ def save_predictions(predictions, inference_dataset, ground_truth, save_dir, num
     num_queries_to_save = min(num_queries_to_save, len(predictions))
 
     # Randomly select a subset of queries to save visualizations for (without replacement)
-    q_idxs = np.random.choice(len(predictions), size=num_queries_to_save, replace=False)
+    #q_idxs = np.random.choice(len(predictions), size=num_queries_to_save, replace=False)
+    if inference_dataset.num_query_images > 710:
+        q_idxs = np.array([55,57,207,209,709])
+    else:
+        q_idxs = np.array([55,57,207,209])
 
     for q_idx in q_idxs:
         # Get the predicted nearest neighbors for the current query
